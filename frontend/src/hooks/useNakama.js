@@ -79,7 +79,7 @@ export function useNakama() {
     const session = sessionRef.current;
     if (!client || !session) throw new Error("Not authenticated");
 
-    const res  = await client.rpcGet(session, "find_match", "");
+    const res  = await client.rpc(session, "find_match", "");
     const body = JSON.parse(res.payload);
     return body.matchId;
   }, []);
@@ -107,7 +107,7 @@ export function useNakama() {
     const client  = clientRef.current;
     const session = sessionRef.current;
     if (!client || !session) return [];
-    const res  = await client.rpcGet(session, "get_leaderboard", "");
+    const res  = await client.rpc(session, "get_leaderboard", "");
     return JSON.parse(res.payload).records || [];
   }, []);
 
