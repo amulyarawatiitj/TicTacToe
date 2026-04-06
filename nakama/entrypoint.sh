@@ -22,4 +22,7 @@ exec /nakama/nakama \
   --session.token_expiry_sec  7200 \
   --console.port              7351 \
   --console.username          "${CONSOLE_USER:-admin}" \
-  --console.password          "${CONSOLE_PASS:-password}"
+  --console.password          "${CONSOLE_PASS:-password}" \
+  --data_dir                  /nakama/data \
+  --runtime.js_entrypoint     tictactoe.js \
+  --runtime.env               ENVIRONMENT=production
