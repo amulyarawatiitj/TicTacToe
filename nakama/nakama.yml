@@ -12,14 +12,13 @@ runtime:
 
 socket:
   server_key: "defaultkey"
+  response_headers:
+    - "Access-Control-Allow-Origin: *"
+    - "Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE"
+    - "Access-Control-Allow-Headers: Content-Type, Authorization"
 
 session:
   token_expiry_sec: 7200
-  http_cors_allowed_origins:
-    - "https://tic-tac-toe-flax-one-36.vercel.app"
-    - "http://localhost:3000"
-    - "http://localhost:5173"
-  http_cors_max_age: 3600
 
 console:
   port: 7351
