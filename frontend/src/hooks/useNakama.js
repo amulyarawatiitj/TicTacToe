@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Client, Session, Socket } from "@heroiclabs/nakama-js";
+import { Client } from "@heroiclabs/nakama-js";
 import cfg from "../config.js";
 
 // Op codes must mirror the server
