@@ -22,6 +22,4 @@ exec /nakama/nakama \
   --session.token_expiry_sec  7200 \
   --console.port              7351 \
   --console.username          "${CONSOLE_USER:-admin}" \
-  --console.password          "${CONSOLE_PASS:-password}" \
-  --console.enable            true \
-  --name                      nakama1
+  --console.password          "${CONSOLE_PASS:-password}"
