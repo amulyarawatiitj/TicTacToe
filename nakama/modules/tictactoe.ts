@@ -374,7 +374,3 @@ function InitModule(
 
   logger.info(`[${moduleName}] Module loaded ✓`);
 }
-
-// Required by Nakama TypeScript runtime
-// @ts-ignore
-!InitModule && InitModule.bind(null);
