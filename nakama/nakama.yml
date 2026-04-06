@@ -3,6 +3,7 @@ port: 7350
 grpcPort: 7349
 
 runtime:
+  path: "/nakama/data/modules"
   js_entrypoint: "tictactoe.js"
 
 socket:
