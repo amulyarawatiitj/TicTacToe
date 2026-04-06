@@ -10,9 +10,9 @@ runtime:
 socket:
   server_key: "defaultkey"
   response_headers:
-    - "Access-Control-Allow-Origin: *"
-    - "Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE"
-    - "Access-Control-Allow-Headers: Content-Type, Authorization"
+    - "Access-Control-Allow-Origin=*"
+    - "Access-Control-Allow-Methods=GET, POST, OPTIONS, PUT, DELETE"
+    - "Access-Control-Allow-Headers=Content-Type, Authorization"
 
 session:
   token_expiry_sec: 7200
