@@ -26,8 +26,6 @@ services:
         --name nakama1
         --database.address root@cockroachdb:26257
         --logger.level DEBUG
-        --runtime.path /nakama/data/modules
-        --runtime.js_entrypoint tictactoe.js
         --metrics.prometheus_port 9100
         --socket.server_key "defaultkey"
         --runtime.http_key "defaulthttpkey"

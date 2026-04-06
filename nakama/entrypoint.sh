@@ -13,8 +13,6 @@ echo "▶ Starting Nakama server..."
 exec /nakama/nakama \
   --database.address "$DATABASE_URL" \
   --logger.level INFO \
-  --runtime.path "/nakama/data/modules" \
-  --runtime.js_entrypoint "tictactoe.js" \
   --socket.server_key "defaultkey" \
   --runtime.http_key "defaulthttpkey" \
   --console.port 7351 \
