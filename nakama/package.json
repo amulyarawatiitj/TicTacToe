@@ -1,0 +1,13 @@
+{
+  "name": "tictactoe-nakama",
+  "version": "1.0.0",
+  "description": "Nakama server modules for multiplayer Tic-Tac-Toe",
+  "scripts": {
+    "build": "npx esbuild modules/tictactoe.ts --bundle --platform=node --target=es5 --outfile=build/tictactoe.js",
+    "watch": "npx esbuild modules/tictactoe.ts --bundle --platform=node --target=es5 --outfile=build/tictactoe.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.0",
+    "nakama-runtime": "^1.8.1"
+  }
+}

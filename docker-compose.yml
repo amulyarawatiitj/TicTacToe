@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  # ── CockroachDB (Nakama's database) ─────────────────────────
+  cockroachdb:
+    image: cockroachdb/cockroach:latest-v23.1
+    command: start-single-node --insecure --store=attrs=ssd,path=/var/roachdb
+    restart: always
+    volumes:
+      - data:/var/roachdb
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health?ready=1"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  # ── Nakama ───────────────────────────────────────────────────
+  nakama:
+    image: registry.heroiclabs.com/heroiclabs/nakama:3.22.0
+    entrypoint:
+      - "/bin/sh"
+      - "-ecx"
+      - >
+        /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
+        exec /nakama/nakama
+        --name nakama1
+        --database.address root@cockroachdb:26257
+        --logger.level DEBUG
+        --session.token_expiry_sec 7200
+        --metrics.prometheus_port 9100
+        --socket.server_key "defaultkey"
+        --runtime.http_key "defaulthttpkey"
+        --console.port 7351
+        --console.username admin
+        --console.password password
+    restart: always
+    links:
+      - "cockroachdb:db"
+    depends_on:
+      cockroachdb:
+        condition: service_healthy
+    volumes:
+      - ./nakama/build:/nakama/data/modules   # compiled JS goes here
+    expose:
+      - "7349"   # game socket
+      - "7350"   # HTTP API
+      - "7351"   # console
+    ports:
+      - "7349:7349"
+      - "7350:7350"
+      - "7351:7351"
+
+volumes:
+  data:

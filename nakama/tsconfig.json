@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "es2015.promise"],
+    "allowJs": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "typeRoots": ["./node_modules"]
+  },
+  "include": ["modules/**/*.ts"],
+  "exclude": ["node_modules"]
+}
