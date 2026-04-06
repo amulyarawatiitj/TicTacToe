@@ -3,22 +3,19 @@ port: 7350
 grpcPort: 7349
 
 database:
-  address: ${DATABASE_URL}
+  address: ""  # Will be overridden by --database.address flag
 
 runtime:
-  js_entrypoint: tictactoe.js
-  http_key: ${HTTP_KEY:-defaulthttpkey}
+  js_entrypoint: "tictactoe.js"
+  http_key: "defaulthttpkey"
 
 socket:
-  server_key: ${SERVER_KEY:-defaultkey}
+  server_key: "defaultkey"
 
 session:
   token_expiry_sec: 7200
 
 console:
   port: 7351
-  username: ${CONSOLE_USER:-admin}
-  password: ${CONSOLE_PASS:-password}
-
-# Enable JavaScript runtime
-runtimeAutoLoad: true
+  username: "admin"
+  password: "password"

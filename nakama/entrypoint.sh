@@ -11,11 +11,5 @@ echo "▶ Running Nakama DB migrations..."
 
 echo "▶ Starting Nakama server..."
 exec /nakama/nakama \
-  --database.address          "$DATABASE_URL" \
-  --logger.level              INFO \
-  --socket.server_key         "${SERVER_KEY:-defaultkey}" \
-  --runtime.http_key          "${HTTP_KEY:-defaulthttpkey}" \
-  --session.token_expiry_sec  7200 \
-  --console.port              7351 \
-  --console.username          "${CONSOLE_USER:-admin}" \
-  --console.password          "${CONSOLE_PASS:-password}"
+  --config /etc/nakama/nakama.yml \
+  --database.address "$DATABASE_URL"
