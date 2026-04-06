@@ -477,11 +477,6 @@ function matchTerminate(
 }
 
 // ========== Export ==========
-declare const global: any;
-if (
-  typeof window === 'undefined' &&
-  typeof global !== 'undefined' &&
-  (global as any).InitModule
-) {
+if (typeof global !== 'undefined') {
   (global as any).InitModule = InitModule;
 }
