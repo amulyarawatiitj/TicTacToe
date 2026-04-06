@@ -4,4 +4,4 @@
 
 // Import the main game module
 // This file is the entry point that Nakama loads
-import "./tictactoe";
+export { InitModule } from "./tictactoe";

@@ -359,6 +359,7 @@ function InitModule(
   nk: nkruntime.Nakama,
   initializer: nkruntime.Initializer,
 ) {
+  logger.info(`[${moduleName}] Initializing...`);
   initializer.registerMatch(moduleName, {
     matchInit,
     matchJoinAttempt,
@@ -374,3 +375,11 @@ function InitModule(
 
   logger.info(`[${moduleName}] Module loaded ✓`);
 }
+
+// Make InitModule globally available for Nakama runtime
+if (typeof globalThis !== 'undefined') {
+  (globalThis as any).InitModule = InitModule;
+}
+
+// Also export for bundler
+export { InitModule };
