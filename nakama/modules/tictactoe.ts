@@ -376,10 +376,10 @@ function InitModule(
   logger.info(`[${moduleName}] Module loaded ✓`);
 }
 
-// Make InitModule globally available for Nakama runtime
+// Export for CommonJS bundler (esbuild with platform=node)
+module.exports = { InitModule };
+
+// Also make globally available
 if (typeof globalThis !== 'undefined') {
   (globalThis as any).InitModule = InitModule;
 }
-
-// Also export for bundler
-export { InitModule };
