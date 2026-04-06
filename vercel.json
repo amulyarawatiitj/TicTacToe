@@ -1,9 +1,10 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
+  "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/build",
-  "env": {
-    "REACT_APP_NAKAMA_HOST": "@react_app_nakama_host",
-    "REACT_APP_NAKAMA_PORT": "7350",
-    "REACT_APP_NAKAMA_USE_SSL": "true"
-  }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
