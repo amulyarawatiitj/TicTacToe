@@ -11,6 +11,7 @@ echo "▶ Running Nakama DB migrations..."
 
 echo "▶ Starting Nakama server..."
 exec /nakama/nakama \
+  --config /nakama/nakama.yml \
   --database.address "$DATABASE_URL" \
   --logger.level INFO \
   --socket.server_key "defaultkey" \

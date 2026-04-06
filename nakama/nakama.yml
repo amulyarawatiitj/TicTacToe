@@ -6,6 +6,7 @@ database:
   address: ""  # Will be overridden by --database.address flag
 
 runtime:
+  path: "/nakama/data/modules"
   js_entrypoint: "tictactoe.js"
   http_key: "defaulthttpkey"
 
