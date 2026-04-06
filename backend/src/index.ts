@@ -238,7 +238,7 @@ function getLeaderboardRpc(
 
     const records = nk.leaderboardRecordsList('tictactoe_leaderboard', [], limit, 0, []);
 
-    const leaderboard = records.map((record, idx) => ({
+    const leaderboard = records.map((record: any, idx: number) => ({
       rank: idx + 1,
       username: record.username,
       wins: record.metadata?.wins || 0,
@@ -477,6 +477,7 @@ function matchTerminate(
 }
 
 // ========== Export ==========
+declare const global: any;
 if (
   typeof window === 'undefined' &&
   typeof global !== 'undefined' &&

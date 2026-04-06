@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Client } from '@nakama/js';
+import { Client } from '@heroiclabs/nakama-js';
 import './App.css';
 import Login from './components/Login';
 import MainMenu from './components/MainMenu';

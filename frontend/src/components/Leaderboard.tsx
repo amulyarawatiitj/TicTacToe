@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Client } from '@nakama/js';
+import { Client } from '@heroiclabs/nakama-js';
 import './Leaderboard.css';
 
 interface LeaderboardProps {
@@ -30,10 +30,10 @@ export default function Leaderboard({ client, session, onBack }: LeaderboardProp
   useEffect(() => {
     const loadLeaderboard = async () => {
       try {
-        const result = await client.rpc(session.token, 'get_leaderboard', {
+        const result = await client.rpc(session as any, 'get_leaderboard', {
           limit: 50,
         });
-        const data = JSON.parse(result.payload);
+        const data = JSON.parse(result.payload as unknown as string);
         setLeaderboard(data.leaderboard || []);
       } catch (err: unknown) {
         const errorMsg = err instanceof Error ? err.message : 'Failed to load leaderboard';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Client } from '@nakama/js';
+import { Client } from '@heroiclabs/nakama-js';
 import './Auth.css';
 
 interface LoginProps {
@@ -52,14 +52,14 @@ export default function Login({ client, onLogin }: LoginProps) {
 
       localStorage.setItem('token', session.token);
       localStorage.setItem('refresh_token', session.refresh_token);
-      localStorage.setItem('username', username);
-      localStorage.setItem('user_id', session.user_id);
+      localStorage.setItem('username', session.username || username);
+      localStorage.setItem('user_id', session.user_id!);
 
       onLogin({
         token: session.token,
         refreshToken: session.refresh_token,
         username: session.username || username,
-        userId: session.user_id,
+        userId: session.user_id!,
       });
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Login failed';

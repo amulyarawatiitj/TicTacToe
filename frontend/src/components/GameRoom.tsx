@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Client } from '@nakama/js';
+import { Client } from '@heroiclabs/nakama-js';
 import './GameRoom.css';
 
 interface GameRoomProps {
@@ -35,17 +35,17 @@ export default function GameRoom({
   const [error, setError] = useState('');
   const [socket, setSocket] = useState<any>(null);
   const socketRef = useRef<any>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const initializeMatch = async () => {
       try {
         // Get initial game state
         try {
-          const result = await client.rpc(session.token, 'get_match_state', {
+          const result = await client.rpc(session as any, 'get_match_state', {
             match_id: matchId,
           });
-          const state = JSON.parse(result.payload);
+          const state = JSON.parse(result.payload as unknown as string);
           setGameState(state);
         } catch (e) {
           // Initialize fresh game state
@@ -65,12 +65,8 @@ export default function GameRoom({
         socketRef.current = newSocket;
         setSocket(newSocket);
 
-        await newSocket.connect(session.token);
+        await newSocket.connect(session as any, true);
         await newSocket.joinMatch(matchId);
-
-        newSocket.onmatchpresence = (matchPresence: any) => {
-          console.log('Match presence update:', matchPresence);
-        };
 
         newSocket.onmatchdata = (matchData: any) => {
           try {

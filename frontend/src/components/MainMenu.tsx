@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Client } from '@nakama/js';
+import { Client } from '@heroiclabs/nakama-js';
 import './MainMenu.css';
 
 interface MainMenuProps {
@@ -37,10 +37,10 @@ export default function MainMenu({
   const loadMatches = async () => {
     setLoading(true);
     try {
-      const result = await client.rpc(session.token, 'find_match', {
+      const result = await client.rpc(session as any, 'find_match', {
         mode: gameMode,
       });
-      const data = JSON.parse(result.payload);
+      const data = JSON.parse(result.payload as unknown as string);
       setMatches(data.matches || []);
     } catch (err) {
       console.error('Failed to load matches:', err);
@@ -60,12 +60,12 @@ export default function MainMenu({
         name: `${session.username}'s Room`,
       };
 
-      const result = await client.rpc(session.token, 'create_match', {
+      const result = await client.rpc(session as any, 'create_match', {
         ...payload,
         mode: gameMode,
       });
 
-      const data = JSON.parse(result.payload);
+      const data = JSON.parse(result.payload as unknown as string);
       onPlayGame(data.match_id);
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to create match';
