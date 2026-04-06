@@ -3,10 +3,11 @@ builder        = "DOCKERFILE"
 dockerfilePath = "nakama/Dockerfile"
 
 [deploy]
-healthcheckPath         = "/healthcheck"
+healthcheckPath         = "/"
 healthcheckTimeout      = 300
 restartPolicyType       = "ON_FAILURE"
 restartPolicyMaxRetries = 3
+port                    = 7350
 
 [env]
 DATABASE_URL            = "postgresql://postgres:rJIgyygimOaSLjzoxPXAySttqHXVYpTV@maglev.proxy.rlwy.net:18661/railway"
