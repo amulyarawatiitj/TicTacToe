@@ -1,0 +1,24 @@
+name: nakama
+port: 7350
+grpcPort: 7349
+
+database:
+  address: ${DATABASE_URL}
+
+runtime:
+  js_entrypoint: tictactoe.js
+  http_key: ${HTTP_KEY:-defaulthttpkey}
+
+socket:
+  server_key: ${SERVER_KEY:-defaultkey}
+
+session:
+  token_expiry_sec: 7200
+
+console:
+  port: 7351
+  username: ${CONSOLE_USER:-admin}
+  password: ${CONSOLE_PASS:-password}
+
+# Enable JavaScript runtime
+runtimeAutoLoad: true
