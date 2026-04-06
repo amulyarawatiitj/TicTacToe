@@ -3,16 +3,10 @@ port: 7350
 grpcPort: 7349
 
 runtime:
-  path: "/nakama/data/modules"
   js_entrypoint: "tictactoe.js"
-  http_key: "defaulthttpkey"
 
 socket:
   server_key: "defaultkey"
-  response_headers:
-    - "Access-Control-Allow-Origin=*"
-    - "Access-Control-Allow-Methods=GET, POST, OPTIONS, PUT, DELETE"
-    - "Access-Control-Allow-Headers=Content-Type, Authorization"
 
 session:
   token_expiry_sec: 7200

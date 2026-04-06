@@ -23,6 +23,7 @@ services:
       - >
         /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
         exec /nakama/nakama
+        --config /nakama/nakama.yml
         --name nakama1
         --database.address root@cockroachdb:26257
         --logger.level DEBUG
@@ -40,6 +41,7 @@ services:
         condition: service_healthy
     volumes:
       - ./nakama/build:/nakama/data/modules   # compiled JS goes here
+      - ./nakama/nakama.yml:/nakama/nakama.yml # config file
     expose:
       - "7349"   # game socket
       - "7350"   # HTTP API
