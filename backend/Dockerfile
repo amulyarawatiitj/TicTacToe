@@ -15,8 +15,8 @@ RUN npm run build
 # Final stage
 FROM heroiclabs/nakama:3.22.0
 
-# Install curl for health checks
-RUN apk add --no-cache curl
+# Install curl for health checks (Debian-based image)
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 
 # Copy built module
 COPY --from=builder /build/build/tictactoe.js /nakama/data/modules/tictactoe.js
