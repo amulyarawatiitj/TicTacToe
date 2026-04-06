@@ -11,11 +11,5 @@ echo "▶ Running Nakama DB migrations..."
 
 echo "▶ Starting Nakama server..."
 exec /nakama/nakama \
-  --database.address "$DATABASE_URL" \
-  --logger.level INFO \
-  --runtime.js_entrypoint "tictactoe.js" \
-  --socket.server_key "defaultkey" \
-  --runtime.http_key "defaulthttpkey" \
-  --console.port 7351 \
-  --console.username "admin" \
-  --console.password "password"
+  --config /nakama/nakama.yml \
+  --database.address "$DATABASE_URL"

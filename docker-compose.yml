@@ -23,16 +23,8 @@ services:
       - >
         /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
         exec /nakama/nakama
-        --name nakama1
+        --config /nakama/nakama.yml
         --database.address root@cockroachdb:26257
-        --logger.level DEBUG
-        --runtime.js_entrypoint tictactoe.js
-        --metrics.prometheus_port 9100
-        --socket.server_key "defaultkey"
-        --runtime.http_key "defaulthttpkey"
-        --console.port 7351
-        --console.username admin
-        --console.password password
     restart: always
     links:
       - "cockroachdb:db"
@@ -40,7 +32,8 @@ services:
       cockroachdb:
         condition: service_healthy
     volumes:
-      - ./nakama/build:/nakama/data/modules   # compiled JS goes here
+      - ./nakama/build:/nakama/data/modules
+      - ./nakama/nakama.yml:/nakama/nakama.yml
     expose:
       - "7349"   # game socket
       - "7350"   # HTTP API
