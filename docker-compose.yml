@@ -1,53 +1,48 @@
-version: "3"
+version: '3.8'
 
 services:
-  # ── CockroachDB (Nakama's database) ─────────────────────────
-  cockroachdb:
-    image: cockroachdb/cockroach:latest-v23.1
-    command: start-single-node --insecure --store=attrs=ssd,path=/var/roachdb
-    restart: always
+  postgres:
+    image: postgres:15-alpine
+    container_name: tictactoe-postgres
+    environment:
+      POSTGRES_DB: nakama
+      POSTGRES_USER: nakama
+      POSTGRES_PASSWORD: localpass
+    ports:
+      - "5432:5432"
     volumes:
-      - data:/var/roachdb
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health?ready=1"]
-      interval: 3s
-      timeout: 3s
+      test: ["CMD-SHELL", "pg_isready -U nakama"]
+      interval: 10s
+      timeout: 5s
       retries: 5
 
-  # ── Nakama ───────────────────────────────────────────────────
   nakama:
-    image: registry.heroiclabs.com/heroiclabs/nakama:3.22.0
-    entrypoint:
-      - "/bin/sh"
-      - "-ecx"
-      - >
-        /nakama/nakama migrate up --database.address root@cockroachdb:26257 &&
-        exec /nakama/nakama
-        --name nakama1
-        --database.address root@cockroachdb:26257
-        --logger.level DEBUG
-        --metrics.prometheus_port 9100
-        --socket.server_key "defaultkey"
-        --runtime.http_key "defaulthttpkey"
-        --console.port 7351
-        --console.username admin
-        --console.password password
-    restart: always
-    links:
-      - "cockroachdb:db"
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: tictactoe-nakama
     depends_on:
-      cockroachdb:
+      postgres:
         condition: service_healthy
-    volumes:
-      - ./nakama/build:/nakama/data/modules
-    expose:
-      - "7349"   # game socket
-      - "7350"   # HTTP API
-      - "7351"   # console
+    environment:
+      DB_DRIVER: postgres
+      DB_URL: postgres://nakama:localpass@postgres:5432/nakama?sslmode=disable
     ports:
-      - "7349:7349"
       - "7350:7350"
       - "7351:7351"
+    volumes:
+      - ./backend/build:/nakama/data/modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7350/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
-  data:
+  postgres_data:
+
+networks:
+  default:
+    name: tictactoe-network

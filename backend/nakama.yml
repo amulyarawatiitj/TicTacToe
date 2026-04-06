@@ -1,0 +1,17 @@
+runtime:
+  env: "production"
+  http_key: "httpkey"
+  js_entrypoint: "tictactoe.js"
+
+session:
+  http_cors_allowed_origins:
+    - "*"
+  
+socket:
+  ping_period_ms: 5000
+  pong_wait_ms: 10000
+  read_buffer_kb: 4096
+  write_buffer_kb: 4096
+
+leaderboard:
+  blacklist_whitelist_enabled: false

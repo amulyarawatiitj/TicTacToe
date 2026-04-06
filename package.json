@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "@heroiclabs/nakama-js": "^2.8.0"
+  "name": "tictactoe-monorepo",
+  "version": "1.0.0",
+  "description": "Multiplayer Tic-Tac-Toe Game - Monorepo",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "build:backend": "cd backend && npm run build",
+    "dev:backend": "docker-compose up -d",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "npm run dev:backend && echo 'Backend started. Run npm run dev:frontend in another terminal'",
+    "build": "npm run build:backend && cd frontend && npm run build",
+    "stop": "docker-compose down"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "tictactoe-backend",
+  "version": "1.0.0",
+  "description": "Nakama backend modules for Tic-Tac-Toe",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=es2020 --outfile=build/tictactoe.js",
+    "dev": "watch 'npm run build' src/"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.19.0",
+    "typescript": "^5.1.0"
+  }
+}
